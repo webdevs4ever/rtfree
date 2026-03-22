@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+const resumePdf = `${import.meta.env.BASE_URL}assets/RTF_CV_close.pdf`;
+
 // Essay data - replace PDF paths with actual articles when ready
 const essays = [
   {
@@ -8,7 +10,7 @@ const essays = [
     category: "Sales",
     date: "March 18, 2026",
     excerpt: "If a client accuses me of being sales-y, I've failed that client. Here's how to make every conversation feel like catching up with a friend.",
-    pdf: "/assets/RTF_CV_close.pdf"
+    pdf: resumePdf
   },
   {
     id: 2,
@@ -16,7 +18,7 @@ const essays = [
     category: "Career",
     date: "March 12, 2026",
     excerpt: "After 10+ years managing accounts for NYC publishers, I traded ad tech for insurance. Here's why it was the best decision I ever made.",
-    pdf: "/assets/RTF_CV_close.pdf"
+    pdf: resumePdf
   },
   {
     id: 3,
@@ -24,14 +26,14 @@ const essays = [
     category: "Insurance",
     date: "March 5, 2026",
     excerpt: "I went from middle-of-the-pack to a top 10 closer company-wide. The secret wasn't working harder—it was rethinking the first 30 seconds.",
-    pdf: "/assets/RTF_CV_close.pdf"
+    pdf: resumePdf
   }
 ];
 
 const featuredSeries = {
   title: "Mastering Needs-Based Selling",
   excerpt: "A 5-part series on conducting financial assessments that actually help people. From term life to final expense, learn to match products to real needs.",
-  pdf: "/assets/RTF_CV_close.pdf"
+  pdf: resumePdf
 };
 
 export default function RTBlog() {
