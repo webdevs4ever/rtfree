@@ -55,7 +55,7 @@ export default function RTBlog() {
   const [hoveredCard, setHoveredCard] = useState(null);
 
   return (
-    <div className="min-h-screen bg-slate-100 text-slate-900" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+    <div className="min-h-screen text-slate-900" style={{ backgroundColor: "#e5e7eb", fontFamily: "'Source Sans 3', sans-serif" }}>
       {/* Google Fonts */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap');
@@ -101,21 +101,21 @@ export default function RTBlog() {
 
       <div className="grain-overlay">
         {/* Header */}
-        <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-slate-100/90 px-6 py-4 backdrop-blur lg:px-16">
+        <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-[#e5e7eb]/90 px-6 py-4 backdrop-blur lg:px-16">
           <div className="mx-auto flex max-w-6xl items-center justify-between">
             <div>
-              <div className="text-xs font-semibold uppercase tracking-[0.24em] text-sky-700">RT Freeman</div>
-              <div className="font-display text-2xl tracking-tight text-slate-900">Sales journal</div>
+              <div className="text-xs font-semibold uppercase tracking-[0.24em] text-amber-600">RT Freeman</div>
+              <div className="font-display text-2xl tracking-tight text-amber-600">Sales journal</div>
             </div>
           <nav className="hidden md:flex gap-8">
             {['Essays', 'Insurance', 'Sales', 'About'].map((item) => (
               <a 
                 key={item}
                 href="#" 
-                  className="group relative text-sm uppercase tracking-[0.18em] text-slate-600 transition-colors hover:text-sky-700"
+                  className="group relative text-sm uppercase tracking-[0.18em] text-slate-600 transition-colors hover:text-amber-600"
               >
                 {item}
-                  <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-sky-600 transition-all group-hover:w-full" />
+                  <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-amber-500 transition-all group-hover:w-full" />
               </a>
             ))}
           </nav>
@@ -147,12 +147,12 @@ export default function RTBlog() {
               <div className="pt-20 md:pt-24">
                 <div className="grid gap-10 lg:grid-cols-[minmax(0,1.5fr)_minmax(280px,0.9fr)] lg:items-end">
                   <div>
-                    <div className="animate-fade-up delay-100 opacity-0 mb-4 inline-flex items-center rounded-full bg-sky-50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-sky-700">
+                    <div className="animate-fade-up delay-100 opacity-0 mb-4 inline-flex items-center rounded-full bg-amber-50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-amber-600">
                       Welcome to my corner
                     </div>
 
                     <div className="animate-fade-up delay-200 opacity-0 flex flex-wrap items-end gap-x-3 gap-y-2">
-                      <h1 className="text-4xl font-semibold tracking-tight text-slate-950 md:text-5xl">
+                      <h1 className="font-display text-4xl tracking-tight text-amber-600 md:text-5xl">
                         RT Scott-Freeman
                       </h1>
                       <span className="pb-1 text-2xl font-light text-slate-500">He/Him</span>
@@ -165,7 +165,7 @@ export default function RTBlog() {
                     <div className="animate-fade-up delay-400 opacity-0 mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 text-lg text-slate-500">
                       <span>New York City Metropolitan Area</span>
                       <span className="hidden text-slate-300 sm:inline">•</span>
-                      <a href="#contact" className="font-semibold text-sky-700 hover:text-sky-800">Contact info</a>
+                      <a href="#contact" className="font-semibold text-amber-600 hover:text-amber-700">Contact info</a>
                     </div>
 
                     <div className="animate-fade-up delay-500 opacity-0 mt-8 flex flex-wrap gap-3">
@@ -173,13 +173,13 @@ export default function RTBlog() {
                         href={essays[0].pdf}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-3 rounded-full bg-sky-700 px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-sky-800"
+                        className="inline-flex items-center gap-3 rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-amber-500 hover:text-slate-900"
                       >
                         Read latest post
                       </a>
                       <a
                         href="#essays"
-                        className="inline-flex items-center gap-3 rounded-full border border-slate-300 px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-slate-700 transition hover:border-sky-700 hover:text-sky-700"
+                        className="inline-flex items-center gap-3 rounded-full border border-slate-300 px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-slate-700 transition hover:border-amber-500 hover:text-amber-600"
                       >
                         Explore essays
                       </a>
@@ -210,10 +210,10 @@ export default function RTBlog() {
             <section id="essays" className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_24px_70px_-32px_rgba(15,23,42,0.25)]">
               <div className="flex items-end justify-between border-b border-slate-200 px-6 py-7 md:px-8">
                 <div>
-                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-700">Writing</div>
-                  <h2 className="mt-2 font-display text-3xl text-slate-950">Recent essays</h2>
+                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-amber-600">Writing</div>
+                  <h2 className="mt-2 font-display text-3xl text-amber-600">Recent essays</h2>
                 </div>
-                <a href="#" className="text-sm font-semibold text-slate-500 transition hover:text-sky-700">
+                <a href="#" className="text-sm font-semibold text-slate-500 transition hover:text-amber-600">
                   View all
                 </a>
               </div>
@@ -226,22 +226,22 @@ export default function RTBlog() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`relative overflow-hidden bg-white p-8 transition-colors ${
-                      hoveredCard === index ? 'bg-sky-50' : ''
+                      hoveredCard === index ? 'bg-amber-50' : ''
                     }`}
                     onMouseEnter={() => setHoveredCard(index)}
                     onMouseLeave={() => setHoveredCard(null)}
                   >
                     <span 
-                      className={`absolute left-0 top-0 w-1 bg-sky-600 transition-all duration-300 ${
+                      className={`absolute left-0 top-0 w-1 bg-amber-500 transition-all duration-300 ${
                         hoveredCard === index ? 'h-full' : 'h-0'
                       }`}
                     />
 
-                    <span className="block text-xs font-semibold uppercase tracking-[0.18em] text-sky-700">
+                    <span className="block text-xs font-semibold uppercase tracking-[0.18em] text-amber-600">
                       {essay.category}
                     </span>
 
-                    <h3 className="mt-4 text-2xl font-semibold leading-snug text-slate-950">
+                    <h3 className="font-display mt-4 text-2xl leading-snug text-amber-600">
                       {essay.title}
                     </h3>
 
@@ -260,8 +260,8 @@ export default function RTBlog() {
             <aside className="space-y-8">
               <section className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_24px_70px_-32px_rgba(15,23,42,0.25)]">
                 <div className="border-b border-slate-200 px-6 py-7">
-                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-700">Featured</div>
-                  <h2 className="mt-2 font-display text-3xl text-slate-950">Series spotlight</h2>
+                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-amber-600">Featured</div>
+                  <h2 className="mt-2 font-display text-3xl text-amber-600">Series spotlight</h2>
                 </div>
                 <div className="p-6">
                   <div className="overflow-hidden rounded-[1.5rem]">
@@ -273,14 +273,14 @@ export default function RTBlog() {
                   </div>
 
                   <div className="mt-6 rounded-[1.5rem] bg-slate-50 p-6">
-                    <span className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-700">Featured series</span>
-                    <h3 className="mt-3 text-2xl font-semibold text-slate-950">{featuredSeries.title}</h3>
+                    <span className="text-xs font-semibold uppercase tracking-[0.18em] text-amber-600">Featured series</span>
+                    <h3 className="font-display mt-3 text-2xl text-amber-600">{featuredSeries.title}</h3>
                     <p className="mt-4 leading-7 text-slate-600">{featuredSeries.excerpt}</p>
                     <a 
                       href={featuredSeries.pdf}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-6 inline-flex items-center gap-3 rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-sky-700"
+                      className="mt-6 inline-flex items-center gap-3 rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-amber-500 hover:text-slate-900"
                     >
                       Start reading
                     </a>
@@ -289,15 +289,15 @@ export default function RTBlog() {
               </section>
 
               <section id="contact" className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-[0_24px_70px_-32px_rgba(15,23,42,0.25)]">
-                <div className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-700">Contact</div>
-                <h2 className="mt-2 font-display text-3xl text-slate-950">Let&apos;s connect</h2>
+                <div className="text-xs font-semibold uppercase tracking-[0.18em] text-amber-600">Contact</div>
+                <h2 className="mt-2 font-display text-3xl text-amber-600">Let&apos;s connect</h2>
                 <p className="mt-4 leading-7 text-slate-600">
                   If you want to talk sales, insurance, or the transition from account management to closing, this is the place.
                 </p>
                 <div className="mt-6 space-y-3 text-sm text-slate-600">
-                  <a href="#" className="block rounded-2xl bg-slate-50 px-4 py-3 transition hover:bg-sky-50 hover:text-sky-700">LinkedIn</a>
-                  <a href="#" className="block rounded-2xl bg-slate-50 px-4 py-3 transition hover:bg-sky-50 hover:text-sky-700">Email</a>
-                  <a href="#" className="block rounded-2xl bg-slate-50 px-4 py-3 transition hover:bg-sky-50 hover:text-sky-700">Speaking requests</a>
+                  <a href="#" className="block rounded-2xl bg-slate-50 px-4 py-3 transition hover:bg-amber-50 hover:text-amber-600">LinkedIn</a>
+                  <a href="#" className="block rounded-2xl bg-slate-50 px-4 py-3 transition hover:bg-amber-50 hover:text-amber-600">Email</a>
+                  <a href="#" className="block rounded-2xl bg-slate-50 px-4 py-3 transition hover:bg-amber-50 hover:text-amber-600">Speaking requests</a>
                 </div>
               </section>
             </aside>
@@ -308,7 +308,7 @@ export default function RTBlog() {
         <footer className="px-6 py-16 lg:px-16">
           <div className="mx-auto grid max-w-6xl gap-12 rounded-[2rem] border border-slate-200 bg-white p-8 shadow-[0_24px_70px_-32px_rgba(15,23,42,0.2)] md:grid-cols-4">
             <div className="md:col-span-2">
-              <div className="font-display text-3xl mb-4 text-slate-950">RT</div>
+              <div className="font-display text-3xl mb-4 text-amber-600">RT</div>
               <p className="max-w-sm leading-relaxed text-slate-600">
                 Sales professional and insurance specialist with 15+ years of experience. 
                 I write about the craft of selling without being "sales-y."
@@ -316,18 +316,18 @@ export default function RTBlog() {
             </div>
 
             <div>
-              <h4 className="mb-6 text-xs font-semibold uppercase tracking-[0.18em] text-sky-700">Connect</h4>
+              <h4 className="mb-6 text-xs font-semibold uppercase tracking-[0.18em] text-amber-600">Connect</h4>
               {['LinkedIn', 'Twitter', 'Email'].map((link) => (
-                <a key={link} href="#" className="mb-3 block text-slate-500 transition-colors hover:text-sky-700">
+                <a key={link} href="#" className="mb-3 block text-slate-500 transition-colors hover:text-amber-600">
                   {link}
                 </a>
               ))}
             </div>
 
             <div>
-              <h4 className="mb-6 text-xs font-semibold uppercase tracking-[0.18em] text-sky-700">Explore</h4>
+              <h4 className="mb-6 text-xs font-semibold uppercase tracking-[0.18em] text-amber-600">Explore</h4>
               {['All Essays', 'Insurance Tips', 'Sales Strategy', 'About Me'].map((link) => (
-                <a key={link} href="#" className="mb-3 block text-slate-500 transition-colors hover:text-sky-700">
+                <a key={link} href="#" className="mb-3 block text-slate-500 transition-colors hover:text-amber-600">
                   {link}
                 </a>
               ))}
