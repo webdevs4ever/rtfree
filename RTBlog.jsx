@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
 const resumePdf = `${import.meta.env.BASE_URL}assets/RTF_CV_close.pdf`;
+const coverImage = "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1600&q=80";
+const profileImage = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80";
 
 // Essay data - replace PDF paths with actual articles when ready
 const essays = [
@@ -36,11 +38,24 @@ const featuredSeries = {
   pdf: resumePdf
 };
 
+const affiliations = [
+  {
+    title: "Gerber Life",
+    subtitle: "Insurance Sales",
+    mark: "G"
+  },
+  {
+    title: "Morgan State University",
+    subtitle: "B.A. Communication Studies",
+    mark: "M"
+  }
+];
+
 export default function RTBlog() {
   const [hoveredCard, setHoveredCard] = useState(null);
 
   return (
-    <div className="min-h-screen bg-stone-100 text-stone-900" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+    <div className="min-h-screen bg-slate-100 text-slate-900" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
       {/* Google Fonts */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap');
@@ -86,178 +101,242 @@ export default function RTBlog() {
 
       <div className="grain-overlay">
         {/* Header */}
-        <header className="sticky top-0 z-50 bg-stone-100 border-b border-stone-900 px-6 lg:px-16 py-4 flex justify-between items-center">
-          <div className="font-display text-2xl font-bold tracking-tight">RT Freeman</div>
+        <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-slate-100/90 px-6 py-4 backdrop-blur lg:px-16">
+          <div className="mx-auto flex max-w-6xl items-center justify-between">
+            <div>
+              <div className="text-xs font-semibold uppercase tracking-[0.24em] text-sky-700">RT Freeman</div>
+              <div className="font-display text-2xl tracking-tight text-slate-900">Sales journal</div>
+            </div>
           <nav className="hidden md:flex gap-8">
             {['Essays', 'Insurance', 'Sales', 'About'].map((item) => (
               <a 
                 key={item}
                 href="#" 
-                className="text-sm uppercase tracking-widest text-stone-700 hover:text-amber-600 transition-colors relative group"
+                  className="group relative text-sm uppercase tracking-[0.18em] text-slate-600 transition-colors hover:text-sky-700"
               >
                 {item}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-amber-500 transition-all group-hover:w-full" />
+                  <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-sky-600 transition-all group-hover:w-full" />
               </a>
             ))}
           </nav>
+          </div>
         </header>
 
-        {/* Hero */}
-        <section className="grid lg:grid-cols-2 min-h-[85vh] border-b border-stone-900">
-          {/* Hero Image */}
-          <div className="relative overflow-hidden bg-stone-200 h-[50vh] lg:h-auto">
-            <img 
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=1000&fit=crop"
-              alt="RT Freeman"
-              className="w-full h-full object-cover grayscale-[20%] hover:grayscale-0 hover:scale-105 transition-all duration-700"
-            />
-            <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-amber-500/10 pointer-events-none" />
-          </div>
-
-          {/* Hero Content */}
-          <div className="flex flex-col justify-center px-6 lg:px-16 py-12 lg:py-20">
-            <span className="animate-fade-up delay-100 opacity-0 flex items-center gap-3 text-xs uppercase tracking-[0.2em] text-amber-600 mb-6">
-              <span className="w-10 h-px bg-amber-500" />
-              Welcome to my corner
-            </span>
-            
-            <h1 className="animate-fade-up delay-200 opacity-0 font-display text-5xl lg:text-7xl font-normal leading-tight tracking-tight mb-6">
-              Rasheim T.<br />Freeman
-            </h1>
-            
-            <p className="animate-fade-up delay-300 opacity-0 text-xl text-stone-500 font-light max-w-md mb-6">
-              Insurance specialist obsessed with the sales process—from cold call to close. 
-              Writing about what I've learned in 15+ years of sales.
-            </p>
-            
-            <div className="animate-fade-up delay-400 opacity-0 flex flex-wrap gap-6 text-sm text-stone-500 mb-8">
-              <span className="flex items-center gap-2">📍 Maryland</span>
-              <span className="flex items-center gap-2">🎓 Morgan State</span>
-              <span className="flex items-center gap-2">🏢 Gerber Life</span>
+        <section className="px-4 py-8 sm:px-6 lg:px-10">
+          <div className="mx-auto max-w-6xl overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_24px_70px_-32px_rgba(15,23,42,0.35)]">
+            <div className="relative h-60 overflow-hidden bg-slate-300 md:h-72 lg:h-80">
+              <img 
+                src={coverImage}
+                alt="LinkedIn-inspired cover"
+                className="h-full w-full object-cover grayscale-[20%]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/25 via-slate-900/5 to-white/15" />
             </div>
 
-            <a 
-              href={essays[0].pdf}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="animate-fade-up delay-500 opacity-0 inline-flex items-center gap-3 bg-stone-900 text-stone-100 px-8 py-4 text-sm uppercase tracking-widest hover:bg-amber-500 hover:text-stone-900 hover:translate-x-1 transition-all w-fit group"
-            >
-              Read Latest Post
-              <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </a>
+            <div className="relative px-6 pb-8 pt-0 md:px-10 lg:px-12">
+              <div className="absolute -top-20 left-6 md:-top-24 md:left-10 lg:left-12">
+                <div className="rounded-full bg-white p-1.5 shadow-xl">
+                  <img
+                    src={profileImage}
+                    alt="RT Freeman profile"
+                    className="h-32 w-32 rounded-full object-cover md:h-40 md:w-40"
+                  />
+                </div>
+              </div>
+
+              <div className="pt-20 md:pt-24">
+                <div className="grid gap-10 lg:grid-cols-[minmax(0,1.5fr)_minmax(280px,0.9fr)] lg:items-end">
+                  <div>
+                    <div className="animate-fade-up delay-100 opacity-0 mb-4 inline-flex items-center rounded-full bg-sky-50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-sky-700">
+                      Welcome to my corner
+                    </div>
+
+                    <div className="animate-fade-up delay-200 opacity-0 flex flex-wrap items-end gap-x-3 gap-y-2">
+                      <h1 className="text-4xl font-semibold tracking-tight text-slate-950 md:text-5xl">
+                        RT Scott-Freeman
+                      </h1>
+                      <span className="pb-1 text-2xl font-light text-slate-500">He/Him</span>
+                    </div>
+
+                    <p className="animate-fade-up delay-300 opacity-0 mt-4 max-w-2xl text-2xl text-slate-700">
+                      Ad sales and account executive turned insurance specialist, writing about trust, process, and the craft of selling well.
+                    </p>
+
+                    <div className="animate-fade-up delay-400 opacity-0 mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 text-lg text-slate-500">
+                      <span>New York City Metropolitan Area</span>
+                      <span className="hidden text-slate-300 sm:inline">•</span>
+                      <a href="#contact" className="font-semibold text-sky-700 hover:text-sky-800">Contact info</a>
+                    </div>
+
+                    <div className="animate-fade-up delay-500 opacity-0 mt-8 flex flex-wrap gap-3">
+                      <a
+                        href={essays[0].pdf}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-3 rounded-full bg-sky-700 px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-sky-800"
+                      >
+                        Read latest post
+                      </a>
+                      <a
+                        href="#essays"
+                        className="inline-flex items-center gap-3 rounded-full border border-slate-300 px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-slate-700 transition hover:border-sky-700 hover:text-sky-700"
+                      >
+                        Explore essays
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="grid gap-4">
+                    {affiliations.map((item) => (
+                      <div key={item.title} className="flex items-center gap-4 rounded-2xl border border-slate-200 bg-slate-50/70 p-4">
+                        <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-900 text-lg font-semibold text-white">
+                          {item.mark}
+                        </div>
+                        <div>
+                          <div className="text-xl font-semibold text-slate-900">{item.title}</div>
+                          <div className="text-sm uppercase tracking-[0.14em] text-slate-500">{item.subtitle}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* Section Header */}
-        <div className="flex justify-between items-baseline px-6 lg:px-16 py-8 border-b border-stone-200">
-          <h2 className="font-display text-2xl">Recent Essays</h2>
-          <a href="#" className="text-xs uppercase tracking-widest text-stone-400 hover:text-amber-600 transition-colors">
-            View all →
-          </a>
-        </div>
+        <main className="px-4 pb-16 sm:px-6 lg:px-10">
+          <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[minmax(0,1.55fr)_minmax(300px,0.9fr)]">
+            <section id="essays" className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_24px_70px_-32px_rgba(15,23,42,0.25)]">
+              <div className="flex items-end justify-between border-b border-slate-200 px-6 py-7 md:px-8">
+                <div>
+                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-700">Writing</div>
+                  <h2 className="mt-2 font-display text-3xl text-slate-950">Recent essays</h2>
+                </div>
+                <a href="#" className="text-sm font-semibold text-slate-500 transition hover:text-sky-700">
+                  View all
+                </a>
+              </div>
 
-        {/* Blog Grid */}
-        <div className="grid md:grid-cols-3 border-b border-stone-900">
-          {essays.map((essay, index) => (
-            <a
-              key={essay.id}
-              href={essay.pdf}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`relative p-8 border-r border-stone-200 last:border-r-0 transition-colors cursor-pointer overflow-hidden
-                ${hoveredCard === index ? 'bg-stone-200' : ''}`}
-              onMouseEnter={() => setHoveredCard(index)}
-              onMouseLeave={() => setHoveredCard(null)}
-            >
-              {/* Accent bar */}
-              <span 
-                className={`absolute top-0 left-0 w-1 bg-amber-500 transition-all duration-300
-                  ${hoveredCard === index ? 'h-full' : 'h-0'}`}
-              />
-              
-              <span className="text-xs uppercase tracking-[0.15em] text-amber-600 block mb-4">
-                {essay.category}
-              </span>
-              
-              <h3 className="font-display text-xl leading-snug mb-4">
-                {essay.title}
-              </h3>
-              
-              <p className="text-stone-500 font-light text-sm leading-relaxed mb-6">
-                {essay.excerpt}
-              </p>
-              
-              <span className="text-xs uppercase tracking-widest text-stone-400">
-                {essay.date}
-              </span>
-            </a>
-          ))}
-        </div>
+              <div className="grid gap-px bg-slate-200 md:grid-cols-3">
+                {essays.map((essay, index) => (
+                  <a
+                    key={essay.id}
+                    href={essay.pdf}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`relative overflow-hidden bg-white p-8 transition-colors ${
+                      hoveredCard === index ? 'bg-sky-50' : ''
+                    }`}
+                    onMouseEnter={() => setHoveredCard(index)}
+                    onMouseLeave={() => setHoveredCard(null)}
+                  >
+                    <span 
+                      className={`absolute left-0 top-0 w-1 bg-sky-600 transition-all duration-300 ${
+                        hoveredCard === index ? 'h-full' : 'h-0'
+                      }`}
+                    />
 
-        {/* Featured Section */}
-        <section className="grid lg:grid-cols-5 border-b border-stone-900">
-          <div className="lg:col-span-3 h-[400px] lg:h-[450px] overflow-hidden">
-            <img 
-              src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=600&fit=crop"
-              alt="Featured"
-              className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-            />
+                    <span className="block text-xs font-semibold uppercase tracking-[0.18em] text-sky-700">
+                      {essay.category}
+                    </span>
+
+                    <h3 className="mt-4 text-2xl font-semibold leading-snug text-slate-950">
+                      {essay.title}
+                    </h3>
+
+                    <p className="mt-4 text-sm leading-7 text-slate-600">
+                      {essay.excerpt}
+                    </p>
+
+                    <span className="mt-8 block text-xs uppercase tracking-[0.16em] text-slate-400">
+                      {essay.date}
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </section>
+
+            <aside className="space-y-8">
+              <section className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_24px_70px_-32px_rgba(15,23,42,0.25)]">
+                <div className="border-b border-slate-200 px-6 py-7">
+                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-700">Featured</div>
+                  <h2 className="mt-2 font-display text-3xl text-slate-950">Series spotlight</h2>
+                </div>
+                <div className="p-6">
+                  <div className="overflow-hidden rounded-[1.5rem]">
+                    <img 
+                      src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=900&q=80"
+                      alt="Featured"
+                      className="h-52 w-full object-cover transition duration-500 hover:scale-105"
+                    />
+                  </div>
+
+                  <div className="mt-6 rounded-[1.5rem] bg-slate-50 p-6">
+                    <span className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-700">Featured series</span>
+                    <h3 className="mt-3 text-2xl font-semibold text-slate-950">{featuredSeries.title}</h3>
+                    <p className="mt-4 leading-7 text-slate-600">{featuredSeries.excerpt}</p>
+                    <a 
+                      href={featuredSeries.pdf}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-6 inline-flex items-center gap-3 rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-sky-700"
+                    >
+                      Start reading
+                    </a>
+                  </div>
+                </div>
+              </section>
+
+              <section id="contact" className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-[0_24px_70px_-32px_rgba(15,23,42,0.25)]">
+                <div className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-700">Contact</div>
+                <h2 className="mt-2 font-display text-3xl text-slate-950">Let&apos;s connect</h2>
+                <p className="mt-4 leading-7 text-slate-600">
+                  If you want to talk sales, insurance, or the transition from account management to closing, this is the place.
+                </p>
+                <div className="mt-6 space-y-3 text-sm text-slate-600">
+                  <a href="#" className="block rounded-2xl bg-slate-50 px-4 py-3 transition hover:bg-sky-50 hover:text-sky-700">LinkedIn</a>
+                  <a href="#" className="block rounded-2xl bg-slate-50 px-4 py-3 transition hover:bg-sky-50 hover:text-sky-700">Email</a>
+                  <a href="#" className="block rounded-2xl bg-slate-50 px-4 py-3 transition hover:bg-sky-50 hover:text-sky-700">Speaking requests</a>
+                </div>
+              </section>
+            </aside>
           </div>
-          
-          <div className="lg:col-span-2 flex flex-col justify-center p-8 lg:p-12 border-l border-stone-200">
-            <span className="font-display text-8xl text-stone-200 leading-none mb-4">01</span>
-            <span className="text-xs uppercase tracking-[0.15em] text-amber-600 mb-4">Featured Series</span>
-            <h3 className="font-display text-2xl mb-4">{featuredSeries.title}</h3>
-            <p className="text-stone-500 font-light mb-6">{featuredSeries.excerpt}</p>
-            <a 
-              href={featuredSeries.pdf}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 bg-stone-900 text-stone-100 px-6 py-3 text-sm uppercase tracking-widest hover:bg-amber-500 hover:text-stone-900 transition-all w-fit group"
-            >
-              Start Reading
-              <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </a>
-          </div>
-        </section>
+        </main>
 
         {/* Footer */}
-        <footer className="px-6 lg:px-16 py-16">
-          <div className="grid md:grid-cols-4 gap-12 mb-12">
+        <footer className="px-6 py-16 lg:px-16">
+          <div className="mx-auto grid max-w-6xl gap-12 rounded-[2rem] border border-slate-200 bg-white p-8 shadow-[0_24px_70px_-32px_rgba(15,23,42,0.2)] md:grid-cols-4">
             <div className="md:col-span-2">
-              <div className="font-display text-3xl mb-4">RT</div>
-              <p className="text-stone-500 font-light max-w-sm leading-relaxed">
+              <div className="font-display text-3xl mb-4 text-slate-950">RT</div>
+              <p className="max-w-sm leading-relaxed text-slate-600">
                 Sales professional and insurance specialist with 15+ years of experience. 
                 I write about the craft of selling without being "sales-y."
               </p>
             </div>
 
             <div>
-              <h4 className="text-xs uppercase tracking-[0.15em] mb-6">Connect</h4>
+              <h4 className="mb-6 text-xs font-semibold uppercase tracking-[0.18em] text-sky-700">Connect</h4>
               {['LinkedIn', 'Twitter', 'Email'].map((link) => (
-                <a key={link} href="#" className="block text-stone-500 hover:text-amber-600 transition-colors mb-3">
+                <a key={link} href="#" className="mb-3 block text-slate-500 transition-colors hover:text-sky-700">
                   {link}
                 </a>
               ))}
             </div>
 
             <div>
-              <h4 className="text-xs uppercase tracking-[0.15em] mb-6">Explore</h4>
+              <h4 className="mb-6 text-xs font-semibold uppercase tracking-[0.18em] text-sky-700">Explore</h4>
               {['All Essays', 'Insurance Tips', 'Sales Strategy', 'About Me'].map((link) => (
-                <a key={link} href="#" className="block text-stone-500 hover:text-amber-600 transition-colors mb-3">
+                <a key={link} href="#" className="mb-3 block text-slate-500 transition-colors hover:text-sky-700">
                   {link}
                 </a>
               ))}
             </div>
-          </div>
 
-          <div className="pt-8 border-t border-stone-200 flex flex-col md:flex-row justify-between text-sm text-stone-400">
-            <span>© 2026 Rasheim T. Freeman. All rights reserved.</span>
-            <span>Built with intention.</span>
+            <div className="border-t border-slate-200 pt-8 text-sm text-slate-400 md:col-span-4 md:flex md:flex-row md:justify-between">
+              <span>© 2026 Rasheim T. Freeman. All rights reserved.</span>
+              <span>Built with intention.</span>
+            </div>
           </div>
         </footer>
       </div>
