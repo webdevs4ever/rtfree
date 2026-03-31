@@ -1,4 +1,4 @@
-# RT Freeman Blog - Setup Guide
+# RT Scott-Freeman Blog - Setup Guide
 
 ## Quick Start
 
