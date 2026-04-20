@@ -4,6 +4,7 @@ import { articleArchivePath, coverImage, essays, featuredSeries, profileImage } 
 export default function RTBlog() {
   const [hoveredCard, setHoveredCard] = useState(null);
   const loginPath = `${import.meta.env.BASE_URL}login`;
+  const emailPath = `${import.meta.env.BASE_URL}email`;
 
   return (
     <div className="min-h-screen text-slate-900" style={{ backgroundColor: "#e5e7eb", fontFamily: "'Source Sans 3', sans-serif" }}>
@@ -227,6 +228,7 @@ export default function RTBlog() {
                 </p>
                 <div className="mt-6 space-y-3 text-sm text-slate-600">
                   <a href="https://www.linkedin.com/in/rt-free/" target="_blank" rel="noopener noreferrer" className="block rounded-2xl bg-slate-50 px-4 py-3 transition hover:bg-amber-50 hover:text-amber-600">LinkedIn</a>
+                  <a href={emailPath} className="block rounded-2xl bg-slate-50 px-4 py-3 transition hover:bg-amber-50 hover:text-amber-600">Email</a>
                   <a href={loginPath} className="block rounded-2xl bg-slate-50 px-4 py-3 transition hover:bg-amber-50 hover:text-amber-600">Speaking requests</a>
                 </div>
               </section>
@@ -260,7 +262,7 @@ export default function RTBlog() {
               >
                 LinkedIn
               </a>
-              <a href={loginPath} className="mb-3 block text-slate-500 transition-colors hover:text-amber-600">
+              <a href={emailPath} className="mb-3 block text-slate-500 transition-colors hover:text-amber-600">
                 Email
               </a>
             </div>

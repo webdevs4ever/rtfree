@@ -1,5 +1,6 @@
 import React from "react";
 import AuthPortal from "./AuthPortal";
+import EmailForm from "./EmailForm";
 import RTBlog from "../RTBlog";
 
 export default function App() {
@@ -9,6 +10,10 @@ export default function App() {
 
   if (pathname === `${basePath}/login`) {
     return <AuthPortal />;
+  }
+
+  if (pathname === `${basePath}/email`) {
+    return <EmailForm />;
   }
 
   if (pathname === homePath) {
