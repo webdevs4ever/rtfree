@@ -1,10 +1,124 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { articleArchivePath, coverImage, essays, featuredSeries, profileImage } from './src/content';
+import { getDb, getFirebaseConfigError } from './src/firebase';
+
+const maxMessageLength = 1000;
+const maxNameLength = 120;
+const maxEmailLength = 200;
+const emailPattern = /.+@.+\..+/;
 
 export default function RTBlog() {
   const [hoveredCard, setHoveredCard] = useState(null);
+  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+  const [errors, setErrors] = useState({});
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   const loginPath = `${import.meta.env.BASE_URL}login`;
   const emailPath = `${import.meta.env.BASE_URL}email`;
+  const remainingCharacters = useMemo(
+    () => maxMessageLength - form.message.length,
+    [form.message.length]
+  );
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setForm((current) => ({
+      ...current,
+      [name]:
+        name === 'message'
+          ? value.slice(0, maxMessageLength)
+          : name === 'name'
+            ? value.slice(0, maxNameLength)
+            : name === 'email'
+              ? value.slice(0, maxEmailLength)
+              : value,
+    }));
+    setErrors((current) => ({ ...current, [name]: '' }));
+    setIsSubmitted(false);
+    setSubmitError('');
+  }
+
+  function validate() {
+    const nextErrors = {};
+    const trimmedName = form.name.trim();
+    const trimmedEmail = form.email.trim();
+    const trimmedMessage = form.message.trim();
+
+    if (!trimmedName) {
+      nextErrors.name = 'Enter your name.';
+    } else if (trimmedName.length > maxNameLength) {
+      nextErrors.name = `Keep your name under ${maxNameLength} characters.`;
+    }
+
+    if (!trimmedEmail) {
+      nextErrors.email = 'Enter a valid email address.';
+    } else if (trimmedEmail.length > maxEmailLength) {
+      nextErrors.email = `Keep your email under ${maxEmailLength} characters.`;
+    } else if (!emailPattern.test(trimmedEmail)) {
+      nextErrors.email = 'Enter a valid email address.';
+    }
+
+    if (!trimmedMessage) {
+      nextErrors.message = 'Add a message before sending.';
+    } else if (trimmedMessage.length > maxMessageLength) {
+      nextErrors.message = `Keep your message under ${maxMessageLength} characters.`;
+    }
+
+    return nextErrors;
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    const nextErrors = validate();
+    setErrors(nextErrors);
+
+    if (Object.keys(nextErrors).length > 0) {
+      setIsSubmitted(false);
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitError('');
+
+    try {
+      const configError = getFirebaseConfigError();
+
+      if (configError) {
+        throw new Error(configError);
+      }
+
+      await addDoc(collection(getDb(), 'contactMessages'), {
+        name: form.name.trim(),
+        email: form.email.trim(),
+        message: form.message.trim(),
+        createdAt: serverTimestamp(),
+      });
+
+      setIsSubmitted(true);
+      setForm({
+        name: '',
+        email: '',
+        message: '',
+      });
+      setErrors({});
+    } catch (error) {
+      setIsSubmitted(false);
+      if (error instanceof Error && error.message.startsWith('Missing Firebase config:')) {
+        setSubmitError('Add your Firebase environment variables before sending messages from this form.');
+      } else {
+        setSubmitError("We couldn't send your message right now. Please try again in a moment.");
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
 
   return (
     <div className="min-h-screen text-slate-900" style={{ backgroundColor: "#e5e7eb", fontFamily: "'Source Sans 3', sans-serif" }}>
@@ -42,6 +156,31 @@ export default function RTBlog() {
 
         .animate-fade-up {
           animation: fadeUp 0.8s ease forwards;
+        }
+
+        .contact-card-scene {
+          perspective: 1800px;
+        }
+
+        .contact-card-flip {
+          position: relative;
+          transform-style: preserve-3d;
+          transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .contact-card-flip.is-open {
+          transform: rotateY(180deg);
+        }
+
+        .contact-card-face {
+          backface-visibility: hidden;
+          -webkit-backface-visibility: hidden;
+        }
+
+        .contact-card-back {
+          position: absolute;
+          inset: 0;
+          transform: rotateY(180deg);
         }
 
         .delay-100 { animation-delay: 0.1s; }
@@ -111,7 +250,7 @@ export default function RTBlog() {
                     </div>
 
                     <p className="animate-fade-up delay-300 opacity-0 mt-4 max-w-2xl text-2xl text-slate-700">
-                      Ad sales and account executive turned insurance specialist, writing about the sales process, end-to-end from cold call to the close.
+                      Sales/marketing manager and account executive turned insurance specialist, writing about the sales process, end-to-end from cold call to the close.
                     </p>
 
                     <div className="animate-fade-up delay-400 opacity-0 mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 text-lg text-slate-500">
@@ -219,17 +358,143 @@ export default function RTBlog() {
                 </div>
               </section>
 
-              <section id="contact" className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-[0_24px_70px_-32px_rgba(15,23,42,0.25)]">
-                <div className="text-xs font-semibold uppercase tracking-[0.18em] text-amber-600">Contact</div>
-                <h2 className="mt-2 font-display text-3xl text-amber-600">Let&apos;s connect</h2>
-                <p className="mt-4 leading-7 text-slate-600">
-                  If you want to talk sales or insurance or if you're passionate about all the weird quirks of group sales, B2B or 1:1 consultations. 
-                  Pls reach out below.
-                </p>
-                <div className="mt-6 space-y-3 text-sm text-slate-600">
-                  <a href="https://www.linkedin.com/in/rt-free/" target="_blank" rel="noopener noreferrer" className="block rounded-2xl bg-slate-50 px-4 py-3 transition hover:bg-amber-50 hover:text-amber-600">LinkedIn</a>
-                  <a href={emailPath} className="block rounded-2xl bg-slate-50 px-4 py-3 transition hover:bg-amber-50 hover:text-amber-600">Email</a>
-                  <a href={loginPath} className="block rounded-2xl bg-slate-50 px-4 py-3 transition hover:bg-amber-50 hover:text-amber-600">Speaking requests</a>
+              <section id="contact" className="contact-card-scene">
+                <div className={`contact-card-flip relative ${isContactFormOpen ? 'min-h-[43rem]' : 'h-[24rem]'} ${isContactFormOpen ? 'is-open' : ''}`}>
+                  <div className="contact-card-face relative isolate flex h-full flex-col rounded-[2rem] border border-slate-200 bg-white p-6 shadow-[0_24px_70px_-32px_rgba(15,23,42,0.25)]">
+                    <button
+                      type="button"
+                      onClick={() => setIsContactFormOpen((current) => !current)}
+                      aria-expanded={isContactFormOpen}
+                      aria-controls="contact-form"
+                      className="absolute right-0 top-0 z-10 h-10 w-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500/70 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+                    >
+                      <span className="sr-only">Show email form</span>
+                      <span className="pointer-events-none absolute inset-0 rounded-tr-[1.9rem] bg-gradient-to-bl from-amber-400 via-orange-400 to-amber-500 shadow-[0_14px_20px_-16px_rgba(234,88,12,0.85)]" />
+                      <span
+                        className="pointer-events-none absolute right-0 top-0 h-10 w-10 rounded-bl-[1rem] bg-gradient-to-bl from-orange-100 via-amber-50 to-white shadow-[-8px_10px_16px_-14px_rgba(15,23,42,0.45)]"
+                        style={{ clipPath: 'polygon(100% 0, 100% 100%, 0 0)' }}
+                      />
+                      <span
+                        className="pointer-events-none absolute right-[4px] top-[4px] h-5 w-5 border-r border-t border-orange-200/90"
+                        style={{ clipPath: 'polygon(100% 0, 100% 100%, 0 0)' }}
+                      />
+                    </button>
+                    <div className="text-xs font-semibold uppercase tracking-[0.18em] text-amber-600">Contact</div>
+                    <h2 className="mt-2 font-display text-3xl text-amber-600">Let&apos;s connect</h2>
+                    <p className="mt-4 leading-7 text-slate-600">
+                      If you want to talk sales or insurance or if you&apos;re passionate about all the weird quirks of group sales, B2B or 1:1 consultations.
+                      Pls reach out below.
+                    </p>
+                    <div className="mt-6 space-y-3 text-sm text-slate-600">
+                      <a href="https://www.linkedin.com/in/rt-free/" target="_blank" rel="noopener noreferrer" className="block rounded-2xl bg-slate-50 px-4 py-3 transition hover:bg-amber-50 hover:text-amber-600">LinkedIn</a>
+                      <button
+                        type="button"
+                        onClick={() => setIsContactFormOpen(true)}
+                        className="block w-full rounded-2xl bg-slate-50 px-4 py-3 text-left transition hover:bg-amber-50 hover:text-amber-600"
+                      >
+                        Email
+                      </button>
+                      <a href={loginPath} className="block rounded-2xl bg-slate-50 px-4 py-3 transition hover:bg-amber-50 hover:text-amber-600">Speaking requests</a>
+                    </div>
+                  </div>
+
+                  <div className="contact-card-face contact-card-back isolate h-full rounded-[2rem] border border-orange-300/70 bg-gradient-to-br from-orange-500 via-amber-500 to-orange-400 p-6 text-orange-50 shadow-[0_24px_70px_-32px_rgba(15,23,42,0.25)]">
+                    <button
+                      type="button"
+                      onClick={() => setIsContactFormOpen(false)}
+                      aria-expanded={isContactFormOpen}
+                      aria-controls="contact-form"
+                      className="absolute right-3 top-3 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border border-orange-100/60 bg-white/20 text-xl text-white transition hover:bg-white/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-500"
+                    >
+                      <span className="sr-only">Hide email form</span>
+                      <span
+                        className="pointer-events-none inline-block leading-none"
+                        style={{ transform: 'rotate(90deg)' }}
+                      >
+                        ↺
+                      </span>
+                    </button>
+                    <div className="text-xs font-semibold uppercase tracking-[0.18em] text-orange-100">Email RT</div>
+                    <h2 className="mt-2 font-display text-3xl text-white">Start the conversation</h2>
+
+                    <div id="contact-form" className="mt-6">
+                      <form className="space-y-4" onSubmit={handleSubmit} noValidate>
+                        <label className="block">
+                          <span className="mb-2 block text-sm font-semibold text-orange-50">Name</span>
+                          <input
+                            name="name"
+                            type="text"
+                            autoComplete="name"
+                            value={form.name}
+                            onChange={handleChange}
+                            placeholder="Your name"
+                            className="w-full rounded-2xl border border-orange-100/60 bg-white/90 px-4 py-3 text-base text-slate-900 outline-none transition placeholder:text-slate-500 focus:border-white focus:bg-white"
+                          />
+                          {errors.name ? <span className="mt-2 block text-sm text-red-600">{errors.name}</span> : null}
+                        </label>
+
+                        <label className="block">
+                          <span className="mb-2 block text-sm font-semibold text-orange-50">Email</span>
+                          <input
+                            name="email"
+                            type="email"
+                            autoComplete="email"
+                            value={form.email}
+                            onChange={handleChange}
+                            placeholder="name@example.com"
+                            className="w-full rounded-2xl border border-orange-100/60 bg-white/90 px-4 py-3 text-base text-slate-900 outline-none transition placeholder:text-slate-500 focus:border-white focus:bg-white"
+                          />
+                          {errors.email ? <span className="mt-2 block text-sm text-red-600">{errors.email}</span> : null}
+                        </label>
+
+                        <label className="block">
+                          <div className="mb-2 flex items-center justify-between gap-4">
+                            <span className="text-sm font-semibold text-orange-50">Message</span>
+                            <span
+                              className={`text-sm font-semibold ${
+                                remainingCharacters <= 100 ? 'text-white' : 'text-orange-100'
+                              }`}
+                            >
+                              {remainingCharacters}
+                            </span>
+                          </div>
+                          <textarea
+                            name="message"
+                            rows="5"
+                            value={form.message}
+                            onChange={handleChange}
+                            placeholder="What would you like to talk about?"
+                            className="w-full resize-none rounded-[1.5rem] border border-orange-100/60 bg-white/90 px-4 py-3 text-base leading-7 text-slate-900 outline-none transition placeholder:text-slate-500 focus:border-white focus:bg-white"
+                          />
+                          {errors.message ? <span className="mt-2 block text-sm text-red-600">{errors.message}</span> : null}
+                        </label>
+
+                        <button
+                          type="submit"
+                          disabled={isSubmitting}
+                          className={`flex w-full items-center justify-center rounded-2xl px-6 py-4 text-sm font-semibold uppercase tracking-[0.18em] transition ${
+                            isSubmitting
+                              ? 'cursor-wait bg-orange-200 text-orange-950'
+                              : 'bg-slate-900 text-white hover:bg-white hover:text-orange-700'
+                          }`}
+                        >
+                          {isSubmitting ? 'Sending...' : 'Send message'}
+                        </button>
+                      </form>
+
+                      {submitError ? (
+                        <div className="mt-4 rounded-2xl border border-red-200 bg-red-50 px-4 py-4 text-sm leading-6 text-red-700">
+                          {submitError}
+                        </div>
+                      ) : null}
+
+                      {isSubmitted ? (
+                        <div className="mt-4 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-4 text-sm leading-6 text-emerald-900">
+                          Your message was sent successfully.
+                        </div>
+                      ) : null}
+                    </div>
+                  </div>
                 </div>
               </section>
             </aside>
