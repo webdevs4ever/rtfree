@@ -1,0 +1,1 @@
+Temporary push diagnostic commit to test GitHub transport without large asset changes.
