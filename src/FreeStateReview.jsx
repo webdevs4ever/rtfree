@@ -209,7 +209,7 @@ export default function FreeStateReview() {
         <div className="mx-auto max-w-7xl">
           <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
             <a
-              href={`${import.meta.env.BASE_URL}freeState/`}
+              href={`${import.meta.env.BASE_URL}freestate/`}
               className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white/80 px-4 py-2 text-sm font-semibold uppercase tracking-[0.16em] text-slate-700 transition hover:border-orange-400 hover:text-orange-700"
             >
               Back to freeState
