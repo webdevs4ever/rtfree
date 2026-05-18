@@ -16,7 +16,7 @@ const useCases = [
   {
     id: "harry",
     title: "Harry, veteran seeking supplemental support",
-    image: `${import.meta.env.BASE_URL}freestate/image1.png`,
+    image: `${import.meta.env.BASE_URL}freestate/image1a.jpg`,
     alt: "Veteran portrait from Addendum A",
     description:
       "Harry, 68, is a disabled Iraqi War veteran living on a fixed income. Long wait times at the VA and lack of dental care pushed him to look for a Medicare Advantage plan. The use case highlights the need for trust, clarity, and advocacy when helping our veterans who have served this nation honorably.",
@@ -24,7 +24,7 @@ const useCases = [
   {
     id: "Shanté",
     title: "Shanté, young worker aging out of family coverage",
-    image: `${import.meta.env.BASE_URL}freestate/image2.png`,
+    image: `${import.meta.env.BASE_URL}freestate/image2a.jpg`,
     alt: "Young waitress portrait from Addendum A",
     description:
       "Shanté, 27, is a freelance graphic designer with unpredictable hours and income who recently aged out of her parents' coverage. She wants affordable co-pays and low maximum out-of-pocket costs plus simple enrollment and flexibility. This use case emphasizes lightweight guidance, speed, and products that meet people where they are financially.",
@@ -32,7 +32,7 @@ const useCases = [
   {
     id: "Carlos",
     title: "Carlos, maintenance worker planning for family security",
-    image: `${import.meta.env.BASE_URL}freestate/image3.png`,
+    image: `${import.meta.env.BASE_URL}freestate/image3a.jpg`,
     alt: "Maintenance worker portrait from Addendum A",
     description:
       "Carlos, 55, is a long-time maintenance technician who began thinking seriously about life insurance after losing a coworker unexpectedly. He wants direct, understandable guidance and dependable coverage for his family. The use case centers on straightforward education, trust-building, and matching insurance protection(s) to real-world problems.",
