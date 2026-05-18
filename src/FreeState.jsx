@@ -5,11 +5,11 @@ const addendumHref = `${import.meta.env.BASE_URL}freestate/addendum-a-charmed-li
 const revenueVisualHref = `${import.meta.env.BASE_URL}freestate-review/screenshot-2026-05-12.png`;
 
 const revenueSeries = [
-  { year: "Year 1", value: 180000, color: "#e76f51" },
-  { year: "Year 2", value: 265000, color: "#f4a261" },
-  { year: "Year 3", value: 390000, color: "#e9c46a" },
-  { year: "Year 4", value: 540000, color: "#8ab17d" },
-  { year: "Year 5", value: 720000, color: "#457b9d" },
+  { year: "Year 1", value: 393247, color: "#e76f51" },
+  { year: "Year 2", value: 621164, color: "#f4a261" },
+  { year: "Year 3", value: 847881, color: "#e9c46a" },
+  { year: "Year 4", value: 1075798, color: "#8ab17d" },
+  { year: "Year 5", value: 1302515, color: "#457b9d" },
 ];
 
 const useCases = [
