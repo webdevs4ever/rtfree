@@ -406,18 +406,12 @@ export default function FreeState() {
                       solutions for individuals and families across the broader DMV and Delaware
                       market. The business serves Medicare-eligible seniors, including veterans
                       who need plan guidance, as well as households seeking term, whole life, and
-                      final expense coverage. The model is built around education-first
-                      consultations, compliant enrollment support, and long-term relationships
-                      driven by referrals and repeat service. Based on business-provided figures,
-                      revenue has grown from about $5,000 in 2023 to $17,000 in 2024 and $57,000
-                      in 2025, with future growth tied to new enrollments, life-insurance
-                      cross-sales, and recurring renewal income. External market references have
-                      been normalized to current public data where possible: Medicare covers about
-                      69 million people nationally, roughly 27.2 million Americans were uninsured
-                      in 2024, and LIMRA reports that close to 100 million adults believe they
-                      need more life insurance coverage. The requested $50,000 loan supports lead
-                      generation, marketing, technology, licensing, and working capital to expand
-                      reach while maintaining a lean operating model.
+                      final expense coverage. <br /> <br />
+                      With a 9/11 veteran serving in an advisory role, FreeState will maintain
+                      strong connections to veteran communities. Outreach through homeless shelters, churches, and back-to-work programs will provide education about health and life 
+                      insurance options while also serving as a meaningful community resource.<br /> <br />
+                      The requested $50,000 loan supports lead generation, marketing, technology,
+                      licensing, and working capital to expand reach while maintaining a lean operating model.
                     </div>
                   </div>
                 ) : (
