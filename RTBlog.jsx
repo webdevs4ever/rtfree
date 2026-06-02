@@ -1,6 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
-import { articleArchivePath, coverImage, essays, featuredSeries, profileImage } from './src/content';
+import { articleArchivePath, imageA, imageB, essays, featuredSeries } from './src/content';
+const coverImage = imageA;   // swap → update imageA in content.js
+const profileImage = imageB; // swap → update imageB in content.js
 import { getDb, getFirebaseConfigError } from './src/firebase';
 
 const maxMessageLength = 1000;

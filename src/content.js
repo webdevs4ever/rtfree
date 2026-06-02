@@ -1,7 +1,14 @@
 const resumePdf = `${import.meta.env.BASE_URL}assets/RTF_CV_close.pdf`;
 
-export const coverImage = `${import.meta.env.BASE_URL}assets/linkedin-cover.png`;
-export const profileImage = `${import.meta.env.BASE_URL}assets/hero_rounded.png`;
+// ImageA = cover/banner (top strip). Swap file: public/assets/imageA.png
+export const imageA = `${import.meta.env.BASE_URL}assets/imageA.png`;
+
+// ImageB = profile avatar (circular, overlapping banner). Swap file: public/assets/imageB.png
+export const imageB = `${import.meta.env.BASE_URL}assets/imageB.png`;
+
+// Legacy aliases kept so nothing else breaks
+export const coverImage = imageA;
+export const profileImage = imageB;
 
 export const essays = [
   {
