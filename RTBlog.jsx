@@ -228,13 +228,11 @@ export default function RTBlog() {
 
             <div className="relative px-6 pb-8 pt-0 md:px-10 lg:px-12">
               <div className="absolute -top-20 left-6 md:-top-24 md:left-10 lg:left-12">
-                <div className="rounded-full bg-white p-1.5 shadow-xl">
-                  <img
-                    src={profileImage}
-                    alt="RT Scott-Freeman profile"
-                    className="h-32 w-32 rounded-full object-cover md:h-40 md:w-40"
-                  />
-                </div>
+                <img
+                  src={profileImage}
+                  alt="RT Scott-Freeman profile"
+                  className="h-32 w-32 rounded-full object-cover shadow-xl md:h-40 md:w-40"
+                />
               </div>
 
               <div className="pt-20 md:pt-24">
