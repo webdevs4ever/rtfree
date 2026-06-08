@@ -231,14 +231,15 @@ export default function RTBlog() {
                 <img
                   src={profileImage}
                   alt="RT Scott-Freeman profile"
-                  className="h-32 w-32 rounded-full object-cover shadow-xl md:h-40 md:w-40"
+                  className="h-32 w-32 rounded-full object-cover md:h-40 md:w-40"
+                  style={{ objectPosition: '50% 50%', transform: 'scale(1.6)' }}
                 />
               </div>
 
               <div className="pt-20 md:pt-24">
                 <div className="grid gap-10 lg:grid-cols-[minmax(0,1.5fr)] lg:items-end">
                   <div>
-                    <div className="animate-fade-up delay-100 opacity-0 mb-4 inline-flex items-center rounded-full bg-amber-50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-amber-600">
+                    <div className="animate-fade-up delay-100 opacity-0 mb-4 inline-flex items-center rounded-full bg-amber-50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-amber-600" style={{ marginTop: '15px' }}>
                       Welcome to my corner of the 'Net
                     </div>
 
